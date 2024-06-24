@@ -1,6 +1,6 @@
 #include "DisplayManager.h"
 #include <Arduino.h>
-#include "waterDropBitmap.h"  // Include the icon header file
+#include "humidityIcon.h"  // Include the icon header file
 
 
 DisplayManager::DisplayManager() : display(TFT_eSPI()) {}
@@ -25,6 +25,9 @@ void DisplayManager::showSensorData(int humidity) {
     display.setTextColor(TFT_CYAN, TFT_BLACK);
     display.setFreeFont(&FreeSans9pt7b);  // Set the custom font
 
+    // Display the icon at the top center
+    showIcon(humidityIcon, (display.width() - 64) / 2, 20, 64, 64);
+
     // Calculate the width of the first line text
     String firstLine = "Soil Humidity";
     int firstLineWidth = display.textWidth(firstLine.c_str());
@@ -33,7 +36,7 @@ void DisplayManager::showSensorData(int humidity) {
     int firstLineCenterX = (display.width() - firstLineWidth) / 2;
 
     // Display the first line centered
-    display.setCursor(firstLineCenterX, display.height() / 2 - 20);
+    display.setCursor(firstLineCenterX, display.height() / 2 + 10);
     display.println(firstLine);
 
     // Convert the humidity to a string and get its width
@@ -44,15 +47,12 @@ void DisplayManager::showSensorData(int humidity) {
     int percentageCenterX = (display.width() - percentageWidth) / 2;
 
     // Display the second line with the percentage centered
-    display.setCursor(percentageCenterX, display.height() / 2 + 20);
+    display.setCursor(percentageCenterX, display.height() / 2 + 60);
     display.print(humidityStr);
 
-    showIcon(waterDropBitmap, (display.width() - 16) / 2, display.height() / 2 + 20, 16, 16);
-
-    
     delay(4000);
 }
 
 void DisplayManager::showIcon(const uint8_t *bitmap, int16_t x, int16_t y, int16_t w, int16_t h) {
-    display.drawBitmap(x, y, bitmap, w, h, TFT_WHITE);
+    display.drawBitmap(x, y, bitmap, w, h, TFT_CYAN);
 }
