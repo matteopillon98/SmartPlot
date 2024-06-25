@@ -1,32 +1,42 @@
+#include <WiFi.h>
+#include <WiFiManager.h>
+#include <TFT_eSPI.h>
+#include "ScreenManager.h"
+#include "SoilHumidityScreen.h"
+#include "TemperatureScreen.h"
 #include "HumiditySensorManager.h"
-#include "DisplayManager.h"
 
-#define HUMIDITY_SENSOR_PIN 34
+TFT_eSPI display = TFT_eSPI();  // Create display object
+ScreenManager screenManager(display);  // Pass the display to the ScreenManager
 
-DisplayManager displayManager;
-HumiditySensorManager humiditySensorManager(HUMIDITY_SENSOR_PIN);
+HumiditySensorManager humiditySensor(34);  // Pin connected to the humidity sensor
 
 void setup() {
     Serial.begin(115200);
+    display.init();
+    display.setRotation(2);  // Adjust as needed
+    display.setTextSize(2);
+    display.setFreeFont(&FreeSans9pt7b);  // Set the custom font
 
-    displayManager.init();
-    humiditySensorManager.init();
 
-    int humidity = humiditySensorManager.readHumidity();
-    displayManager.showSensorData(humidity);
+    humiditySensor.init();  // Initialize the humidity sensor
 
-    Serial.print("Soil Humidity: ");
-    Serial.print(humidity);
-    Serial.println("%");
+    // Initialize screens
+    SoilHumidityScreen* soilHumidityScreen = new SoilHumidityScreen(&humiditySensor);
+    TemperatureScreen* temperatureScreen = new TemperatureScreen(22.5);   // Example temperature value (commented as you don't have a sensor yet)
+
+    screenManager.addScreen(soilHumidityScreen);
+    screenManager.addScreen(temperatureScreen);  // Add temperature screen when sensor is available
+
+    // Show the first screen
+    screenManager.displayCurrentScreen();
 }
 
 void loop() {
-    int humidity = humiditySensorManager.readHumidity();
-    displayManager.showSensorData(humidity);
-
-    Serial.print("Soil Humidity: ");
-    Serial.print(humidity);
-    Serial.println("%");
-
-    delay(2000);
+    static unsigned long lastSwitchTime = 0;
+    if (millis() - lastSwitchTime > 5000) {  // Switch screen every 5 seconds
+        screenManager.nextScreen();
+        screenManager.displayCurrentScreen();
+        lastSwitchTime = millis();
+    }
 }
