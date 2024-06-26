@@ -32,7 +32,7 @@ void TemperatureScreen::display(TFT_eSPI &display) {
     int temperatureCenterX = (display.width() - temperatureWidth) / 2;
 
     // Display the second line with the temperature centered
-    display.setCursor(temperatureCenterX, display.height() / 2 + 60);
+    display.setCursor(temperatureCenterX, display.height() / 2 + 65);
     display.print(temperatureStr);
 
 }

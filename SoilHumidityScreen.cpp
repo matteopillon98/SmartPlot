@@ -34,6 +34,6 @@ void SoilHumidityScreen::display(TFT_eSPI &display) {
     int percentageCenterX = (display.width() - percentageWidth) / 2;
 
     // Display the second line with the percentage centered
-    display.setCursor(percentageCenterX, display.height() / 2 + 60);
+    display.setCursor(percentageCenterX, display.height() / 2 + 65);
     display.print(humidityStr);
 }
