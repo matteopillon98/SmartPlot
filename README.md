@@ -1,36 +1,37 @@
-Components Used
-ESP32
-TFT Display with GC9A01 driver
-Soil Humidity Sensor
-WiFi Module
-(Optional) Temperature Sensor
-Physical Connections
-Here are the physical connections used in the project:
+# Components Used
+- ESP32
+- TFT Display with GC9A01 driver
+- Soil Humidity Sensor
+- WiFi Module
+- Temperature Sensor
+- Physical Connections
+- Here are the physical connections used in the project:
 
-TFT Display
+## TFT Display Configuration
 
-VCC to 3.3V
-GND to GND
-CS to pin 5
-RESET to pin 22
-DC to pin 21
-MOSI to pin 23
-SCK to pin 18
-LED to 3.3V
+- VCC to 3.3V
+- GND to GND
+- SDA to pin 23
+- SCK to pin 5
+- CS to pin 15
+- DC to pin 2
+- LED to 3.3V
+- RESET to pin 4
 
-Soil Humidity Sensor
+## Soil Humidity Sensor Configuration
 
-VCC to 3.3V
-GND to GND
-Analog output to pin 34
-WiFi Module
+- VCC to 3.3V
+- GND to GND
+- Analog output to pin 34
 
-Integrated in ESP32
-Software Setup
-Install the necessary libraries:
+## WiFi Module
 
-TFT_eSPI
-WiFi
-WiFiManager
-NTPClient
-WiFiUdp
+- Integrated in ESP32
+
+# Install the necessary libraries:
+
+- TFT_eSPI
+- WiFi
+- WiFiManager
+- NTPClient
+- WiFiUdp
