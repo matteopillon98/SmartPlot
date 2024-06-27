@@ -15,6 +15,8 @@ private:
     NTPClient &timeClient;
     String getFormattedTime();
     String getFormattedDate();
+    bool isDST(int day, int month, int weekday);
+
 
 };
 
