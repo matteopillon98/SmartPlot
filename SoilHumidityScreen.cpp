@@ -8,7 +8,6 @@ void SoilHumidityScreen::display(TFT_eSPI &display) {
 
     display.fillScreen(TFT_BLACK);
     display.setTextColor(TFT_CYAN, TFT_BLACK);
-    display.setFreeFont(&FreeSans9pt7b);  // Set the custom font
 
     // Display the icon at the top center
     int iconX = (display.width() - 64) / 2;  // Adjust for your icon size

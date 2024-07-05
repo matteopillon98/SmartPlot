@@ -52,7 +52,6 @@ String TimeScreen::getFormattedDate() {
 
 void TimeScreen::display(TFT_eSPI &display) {
     display.setTextColor(TFT_WHITE, TFT_BLACK); 
-    display.setFreeFont(&FreeSans9pt7b);  // Set the custom font
     display.setTextSize(3);
 
     String timeStr = getFormattedTime();

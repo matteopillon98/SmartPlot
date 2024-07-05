@@ -6,7 +6,6 @@ TemperatureScreen::TemperatureScreen(float temperature) : temperature(temperatur
 void TemperatureScreen::display(TFT_eSPI &display) {
     display.fillScreen(TFT_BLACK);
     display.setTextColor(TFT_RED, TFT_BLACK);
-    display.setFreeFont(&FreeSans9pt7b);  // Set the custom font
 
      //Display the icon at the top center (if you have one for temperature)
      int iconX = (display.width() - 64) / 2;  // Adjust for your icon size
